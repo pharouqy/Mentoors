@@ -84,7 +84,7 @@ exports.getUserById = async (req, res) => {
 // Mettre à jour un utilisateur (Admin ou l'utilisateur lui-même)
 exports.updateUser = async (req, res) => {
   try {
-    const { username, email, password, role } = req.body;
+    const { firstName, lastName, email, password, role } = req.body;
 
     const user = await User.findByPk(req.params.id);
 
@@ -100,7 +100,8 @@ exports.updateUser = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 10);
       user.password = hashedPassword;
     }
-    if (username) user.username = username;
+    if (firstName) user.firstName = firstName;
+    if (lastName) user.lastName = lastName;
     if (email) user.email = email;
     if (role) user.role = role;
 

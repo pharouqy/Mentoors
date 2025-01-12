@@ -14,7 +14,7 @@ import {
 } from '../actions/userActions';
 
 const initialState = {
-  user: null,
+  user: localStorage.getItem('user'),
   users: [],
   loading: false,
   error: null

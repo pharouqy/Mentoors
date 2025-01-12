@@ -32,7 +32,7 @@ const Profil = () => {
     };
 
     fetchData();
-  }, [user.role]);
+  }, [user.role, user.id]);
 
   const handleDelete = async (id) => {
     try {
@@ -66,6 +66,12 @@ const Profil = () => {
       {user.role === "admin" ? (
         <>
           <h2 className="text-xl font-semibold mb-2">Liste des utilisateurs</h2>
+          <button
+            onClick={() => navigate("/signup")}
+            className="bg-green-500 text-white p-2 rounded mb-4"
+          >
+            Crée un nouvelle utilisateur
+          </button>
           {data &&
             data.map((user) => (
               <div key={user.id} className="mb-2 p-2 border rounded">
@@ -91,9 +97,9 @@ const Profil = () => {
         </>
       ) : (
         <p className="text-center text-gray-500">
-       <>
-          <h2 className="text-xl font-semibold mb-2">Liste des utilisateurs</h2>
-          {data &&
+          <>
+            <h2 className="text-xl font-semibold mb-2">Liste des utilisateurs</h2>
+            {data &&
               <div key={user.id} className="mb-2 p-2 border rounded">
                 <p>
                   {user.name} ({user.email}) - Rôle: {user.role}
@@ -105,16 +111,10 @@ const Profil = () => {
                   >
                     Mettre à jour
                   </button>
-                  <button
-                    onClick={() => handleDelete(user.id)}
-                    className="bg-red-500 text-white p-2 rounded ml-2"
-                  >
-                    Supprimer
-                  </button>
                 </div>
               </div>
-              }
-        </>
+            }
+          </>
         </p>
       )}
     </div>

@@ -46,7 +46,8 @@ const SignUp = () => {
             role: formData.role
         };
         dispatch(signup(signupData));
-        navigate('/profil'); // Redirect to profile page after successful signup
+        alert("Signup Successful");
+        navigate("/profil");
     };
 
     return (

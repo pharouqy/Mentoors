@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const UpdatePage = () => {
     const url = `${import.meta.env.VITE_API_URL}/api/users/`;
@@ -17,18 +18,16 @@ const UpdatePage = () => {
         // Fetch data based on the id
         const fetchData = async () => {
             try {
-                const response = await fetch(`${url}${id}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-                        },
-                    }
-                );
-                const result = await response.json();
+                const response = await axios.get(`${url}${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+                    },
+                });
+                const result = response.data;
                 setData(result);
                 setFormData({
-                    firstname: result.firstName,
-                    lastname: result.lastName,
+                    firstName: result.firstName,
+                    lastName: result.lastName,
                     email: result.email,
                     role: result.role,
                     password: "" // Password should not be pre-filled for security reasons
@@ -39,7 +38,7 @@ const UpdatePage = () => {
         };
 
         fetchData();
-    }, [id]);
+    }, [id, url]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,18 +48,18 @@ const UpdatePage = () => {
         }));
     };
 
+    console.log(formData);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${url}${id}`, {
-                method: "PUT",
+            const response = await axios.put(`${url}${id}`, formData, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
                 },
-                body: JSON.stringify(formData)
             });
-            if (response.ok) {
+            if (response.status === 200) {
                 alert("Data updated successfully!");
             } else {
                 alert("Failed to update data.");
@@ -82,8 +81,8 @@ const UpdatePage = () => {
                     <label className="block text-sm font-medium text-gray-700">First Name:</label>
                     <input
                         type="text"
-                        name="firstname"
-                        value={formData.firstname}
+                        name="firstName"
+                        value={formData.firstName}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
@@ -92,8 +91,8 @@ const UpdatePage = () => {
                     <label className="block text-sm font-medium text-gray-700">Last Name:</label>
                     <input
                         type="text"
-                        name="lastname"
-                        value={formData.lastname}
+                        name="lastName"
+                        value={formData.lastName}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />

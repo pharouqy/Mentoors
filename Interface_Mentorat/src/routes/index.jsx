@@ -3,6 +3,7 @@ import SignUp from "../pages/signup";
 import Profil from "../pages/profil";
 import UpdatePage from "../pages/update";
 import Index from "../pages/index";
+import Sessions from "../pages/sessions";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -16,6 +17,14 @@ const RoutesComponent = () => {
         <Route path="/" element={<Index />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route
+          path="/sessions/"
+          element={
+            <PrivateRoute>
+              <Sessions />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/profil"
           element={
