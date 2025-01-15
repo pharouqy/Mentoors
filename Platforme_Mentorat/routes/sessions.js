@@ -14,7 +14,7 @@ const router = express.Router();
 router.post('/', authenticate, createSession);
 
 // Récupérer toutes les sessions (Admin uniquement)
-router.get('/', authenticate, authorize(['admin']), getAllSessions);
+router.get('/', authenticate, /*authorize(['admin']),*/ getAllSessions);
 
 // Récupérer une session par son ID
 router.get('/:id', authenticate, getSessionById);

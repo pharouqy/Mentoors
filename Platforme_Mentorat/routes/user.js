@@ -16,7 +16,7 @@ const router = express.Router();
 router.get('/logout', logout); // OK
 
 // Récupérer tous les utilisateurs (Admin uniquement)
-router.get('/', authenticate, authorize(['admin']), getAllUsers); // OK
+router.get('/', authenticate, /*authorize(['admin']),*/ getAllUsers); // OK
 
 // Récupérer un utilisateur par son ID (Admin ou l'utilisateur lui-même)
 router.get('/:id', authenticate, getUserById);  // OK

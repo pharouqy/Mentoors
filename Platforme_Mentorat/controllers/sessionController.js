@@ -5,7 +5,7 @@ const { Session } = require('../models');
 exports.createSession = async (req, res) => {
   try {
     const { mentorId, menteeId, date, status } = req.body;
-
+    console.log(req.body);
     if (!mentorId || !menteeId || !date || !status) {
       return res.status(400).json({ error: 'Tous les champs sont requis.' });
     }

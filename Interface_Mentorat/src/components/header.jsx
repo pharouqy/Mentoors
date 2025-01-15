@@ -4,7 +4,6 @@ import { logout } from "../actions/authActions";
 
 const Header = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const userRole = useSelector((state) => state.auth?.user?.role); // Assuming role is stored in state.auth.role
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,11 +27,6 @@ const Header = () => {
               <li>
                 <button onClick={() => navigate("/sessions")}>Sessions</button>
               </li>
-              {userRole === "admin" && (
-                <li>
-                  <button onClick={() => navigate("/signup")}>Sign Up</button>
-                </li>
-              )}
               <li>
                 <button onClick={handleLogout}>Logout</button>
               </li>
