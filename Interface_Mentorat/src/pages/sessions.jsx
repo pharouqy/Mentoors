@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const url1 = `${import.meta.env.VITE_API_URL}/api/sessions/`;
 const url2 = `${import.meta.env.VITE_API_URL}/api/users/`;
@@ -100,11 +99,21 @@ const Sessions = () => {
                 <h2 className="text-xl font-semibold">
                   Session ID: {session.id}
                 </h2>
+                <p className="text-gray-700">
+                  Date:{" "}
+                  {new Date(session.date).toLocaleDateString("fr-FR", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
                 <p className="text-gray-700">Status: {session.status}</p>
                 {mentor && (
-                  <p className="text-gray-700">
-                    Mentor: {mentor.firstName} {mentor.lastName}
-                  </p>
+                  <>
+                    <p className="text-gray-700">
+                      Mentor: {mentor.firstName} {mentor.lastName}
+                    </p>
+                  </>
                 )}
                 {mentee && (
                   <p className="text-gray-700">
@@ -117,6 +126,14 @@ const Sessions = () => {
                 >
                   Delete
                 </button>
+                {mentor && (
+                    <Link to={`/update-session/${session.id}`}>
+                      <button className="bg-blue-500 text-white px-4 py-2 rounded mt-2">
+                        Update
+                      </button>
+                    </Link>
+
+                )}
               </li>
             );
           })}
@@ -131,16 +148,33 @@ const Sessions = () => {
                 <h2 className="text-xl font-semibold">
                   Session ID: {session.id}
                 </h2>
+                <p className="text-gray-700">
+                  Date:{" "}
+                  {new Date(session.date).toLocaleDateString("fr-FR", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
                 <p className="text-gray-700">Status: {session.status}</p>
                 {mentor && (
-                  <p className="text-gray-700">
-                    Mentor: {mentor.firstName} {mentor.lastName}
-                  </p>
+                  <>
+                    <p className="text-gray-700">
+                      Mentor: {mentor.firstName} {mentor.lastName}
+                    </p>
+                  </>
                 )}
                 {mentee && (
                   <p className="text-gray-700">
                     Mentee: {mentee.firstName} {mentee.lastName}
                   </p>
+                )}
+                {mentor && (
+                    <Link to={`/update-session/${session.id}`}>
+                      <button className="bg-blue-500 text-white px-4 py-2 rounded mt-2">
+                        Update
+                      </button>
+                    </Link>
                 )}
               </li>
             );

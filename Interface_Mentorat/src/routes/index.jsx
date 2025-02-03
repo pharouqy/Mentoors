@@ -4,6 +4,7 @@ import Profil from "../pages/profil";
 import UpdatePage from "../pages/update";
 import Index from "../pages/index";
 import Sessions from "../pages/sessions";
+import UpdateSession from "../pages/updateSession";
 import CreateSession from "../pages/createSession";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "../components/Header";
@@ -26,11 +27,19 @@ const RoutesComponent = () => {
             </PrivateRoute>
           }
         />
-                <Route
+        <Route
           path="/create-session"
           element={
             <PrivateRoute>
               <CreateSession />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/update-session/:id"
+          element={
+            <PrivateRoute>
+              <UpdateSession />
             </PrivateRoute>
           }
         />
