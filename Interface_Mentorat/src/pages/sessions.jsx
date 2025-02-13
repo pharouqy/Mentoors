@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import MessageComponent from "../components/message";
 
 const url1 = `${import.meta.env.VITE_API_URL}/api/sessions/`;
 const url2 = `${import.meta.env.VITE_API_URL}/api/users/`;
@@ -144,7 +145,8 @@ const Sessions = () => {
             const mentor = findUserById(session.mentorId);
             const mentee = findUserById(session.menteeId);
             return (
-              <li key={session.id} className="bg-white p-4 rounded shadow">
+              <div key={session.id}>
+              <li className="bg-white p-4 rounded shadow">
                 <h2 className="text-xl font-semibold">
                   Session ID: {session.id}
                 </h2>
@@ -177,6 +179,10 @@ const Sessions = () => {
                     </Link>
                 )}
               </li>
+              <li>
+                <MessageComponent sessionId={session.id} />
+              </li>
+              </div>
             );
           })}
         </ul>
