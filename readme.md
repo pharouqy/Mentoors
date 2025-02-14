@@ -76,9 +76,9 @@ PORT=4000
 JWT_SECRET=secret_key
 ```
 Créer un fichier `.env` dans `Interface_Mentorat/` si nécessaire.
-
+```
 VITE_API_URL=url_of_API
-
+```
 ### 4️⃣ Exécution de l'application
 #### Démarrer le backend :
 ```bash
