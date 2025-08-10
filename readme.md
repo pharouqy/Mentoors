@@ -2,7 +2,7 @@
 
 ## Description
 
-La plateforme de mentorat **Pharouqy Mentoors** est une application full-stack permettant aux mentors et aux mentorés de se connecter, d'organiser des sessions de mentorat et d'échanger des messages. Elle est composée d'une interface utilisateur développée en React (Interface_Mentorat) et d'une API backend en Node.js avec Express (Platforme_Mentorat).
+La plateforme de mentorat **Mentoors** est une application full-stack permettant aux mentors et aux mentorés de se connecter, d'organiser des sessions de mentorat et d'échanger des messages. Elle est composée d'une interface utilisateur développée en React (Interface_Mentorat) et d'une API backend en Node.js avec Express (Platforme_Mentorat).
 
 ## 📁 Structure du Projet
 
@@ -109,5 +109,23 @@ Ce projet est sous licence **MIT**.
 
 ---
 
-👨‍💻 Développé avec ❤️ par **Younsi Farouk** et l'équipe **Pharouqy Mentoors**
+👨‍💻 Développé avec ❤️ par **Younsi Farouk** et l'équipe **Mentoors**
 
+
+## 📷 Captures d'écran
+
+### Accueil
+![Accueil](Captures_App/Home.png)
+
+### Authentification
+- ![Connexion](Captures_App/Signin.png)
+- ![Inscription](Captures_App/Signup.png)
+
+### Profil
+- ![Profil Utilisateur](Captures_App/Profil.png)
+- ![Profil Administrateur](Captures_App/Profil(Admin).png)
+
+### Sessions
+- ![Sessions (Utilisateur)](Captures_App/Sessions.png)
+- ![Sessions (Admin)](Captures_App/Session(Admin).png)
+- ![Création de Session](Captures_App/CreateSession.png)
