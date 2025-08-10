@@ -23,9 +23,12 @@ export const login = ({ email, password }) => {
         }
       )
       .then((response) => {
-        dispatch({ type: LOGIN_SUCCESS, payload: response.data });
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+        const { user, token } = response.data || {};
+        // Persist first
+        localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("user", JSON.stringify(user));
+        // Then update Redux with only the user object
+        dispatch({ type: LOGIN_SUCCESS, payload: user });
       })
       .catch((error) => {
         dispatch({ type: LOGIN_FAILURE, payload: error.message });

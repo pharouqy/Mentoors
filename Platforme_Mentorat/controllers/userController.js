@@ -37,6 +37,49 @@ exports.createUser = async (req, res) => {
   }
 };
 
+// Inscription publique (sans authentification)
+exports.register = async (req, res) => {
+  try {
+    const { firstName, lastName, email, password, role } = req.body;
+
+    if (!lastName || !firstName || !email || !password || !role) {
+      return res.status(400).json({ error: "Tous les champs sont requis." });
+    }
+
+    // Empêcher la création d'admin via le registre public
+    const normalizedRole = String(role).toLowerCase();
+    if (!["mentor", "mentee"].includes(normalizedRole)) {
+      return res.status(400).json({ error: "Rôle invalide pour l'inscription." });
+    }
+
+    // Vérifier les doublons d'email
+    const existing = await User.findOne({ where: { email } });
+    if (existing) {
+      return res.status(409).json({ error: "Un utilisateur avec cet email existe déjà." });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      role: normalizedRole,
+    });
+
+    return res.status(201).json({
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      role: user.role,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Erreur lors de l'inscription." });
+  }
+};
+
 // Récupérer tous les utilisateurs (Admin uniquement)
 exports.getAllUsers = async (req, res) => {
   try {

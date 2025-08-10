@@ -18,13 +18,16 @@ const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return { ...state, loading: true, error: null };
-    case LOGIN_SUCCESS:
+    case LOGIN_SUCCESS: {
+      const nextUser = action.payload && action.payload.user ? action.payload.user : action.payload;
       return {
         ...state,
         loading: false,
-        user: action.payload,
+        user: nextUser,
         isAuthenticated: true,
+        error: null,
       };
+    }
     case LOGIN_FAILURE:
       return {
         ...state,

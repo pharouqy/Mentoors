@@ -13,4 +13,7 @@ router.post('/', authenticate, sendMessage);
 // Récupérer tous les messages d'une session
 router.get('/:sessionId', authenticate, getMessagesBySession);
 
+
 module.exports = router;
+
+
