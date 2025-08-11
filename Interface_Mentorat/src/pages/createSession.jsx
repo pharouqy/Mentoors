@@ -202,8 +202,8 @@ const CreateSession = () => {
                 <option value="" className="bg-slate-800 text-white">
                   -- Choisir un statut --
                 </option>
-                <option value="planned" className="bg-slate-800 text-white">
-                  Planifiée
+                <option value="pending" className="bg-slate-800 text-white">
+                  En attente
                 </option>
                 <option value="active" className="bg-slate-800 text-white">
                   Active

@@ -172,7 +172,7 @@ const UpdateSession = () => {
                 className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 ${errors.status ? 'border-red-400' : 'border-white/20'}`}
               >
                 <option value="" className="bg-slate-800 text-white">-- Choisir un statut --</option>
-                <option value="planned" className="bg-slate-800 text-white">Planifiée</option>
+                <option value="pending" className="bg-slate-800 text-white">En attente</option>
                 <option value="active" className="bg-slate-800 text-white">Active</option>
                 <option value="completed" className="bg-slate-800 text-white">Terminée</option>
                 <option value="cancelled" className="bg-slate-800 text-white">Annulée</option>
