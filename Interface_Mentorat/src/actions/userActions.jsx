@@ -23,7 +23,7 @@ export const getUser = (userId) => {
     dispatch({ type: GET_USER_REQUEST });
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/users/${userId}`,
+        `${import.meta.env.VITE_API_URL}api/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -50,7 +50,7 @@ export const getAllUsers = () => {
     dispatch({ type: GET_ALL_USERS_REQUEST });
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/users/`,
+        `${import.meta.env.VITE_API_URL}api/users/`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -94,7 +94,7 @@ export const deleteUser = (userId) => {
     dispatch({ type: DELETE_USER_REQUEST });
     try {
       await axios.delete(
-        `${import.meta.env.VITE_API_URL}/api/users/${userId}`,
+        `${import.meta.env.VITE_API_URL}api/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

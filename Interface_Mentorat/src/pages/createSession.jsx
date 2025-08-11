@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const url = `${import.meta.env.VITE_API_URL}/api/users/`;
-const createSessionUrl = `${import.meta.env.VITE_API_URL}/api/sessions`;
+const url = `${import.meta.env.VITE_API_URL}api/users/`;
+const createSessionUrl = `${import.meta.env.VITE_API_URL}api/sessions`;
 
 const CreateSession = () => {
     const [mentees, setMentees] = useState([]);
