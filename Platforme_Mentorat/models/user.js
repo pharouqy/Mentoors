@@ -33,13 +33,13 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Session, {
       as: "MentorSessions",
       foreignKey: "mentorId",
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
     User.hasMany(models.Session, {
       as: "MenteeSessions",
       foreignKey: "menteeId",
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
     User.hasMany(models.Message, {

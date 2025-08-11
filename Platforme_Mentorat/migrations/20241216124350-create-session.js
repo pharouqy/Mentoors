@@ -17,7 +17,7 @@ module.exports = {
           key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
+        onDelete: 'CASCADE'
       },
       menteeId: {
         type: Sequelize.INTEGER.UNSIGNED,
@@ -27,7 +27,7 @@ module.exports = {
           key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
+        onDelete: 'CASCADE'
       },
       date: {
         type: Sequelize.DATE,
