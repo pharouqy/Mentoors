@@ -13,7 +13,7 @@ export const login = ({ email, password }) => {
     dispatch({ type: LOGIN_REQUEST });
     axios
       .post(
-        `${import.meta.env.VITE_API_URL}api/users/login`,
+        `${import.meta.env.VITE_API_URL}/api/users/login`,
         {
           email,
           password,
@@ -41,7 +41,7 @@ export const logout = () => {
   return async (dispatch) => {
     dispatch({ type: LOGOUT_REQUEST });
     try {
-      await axios.get(`${import.meta.env.VITE_API_URL}api/users/logout`, {
+      await axios.get(`${import.meta.env.VITE_API_URL}/api/users/logout`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }

@@ -8,7 +8,7 @@ const MessageComponent = ({ sessionId }) => {
     const [editMessage, setEditMessage] = useState({ id: null, text: "" });
     const [isLoading, setIsLoading] = useState(false);
     const [isSending, setIsSending] = useState(false);
-    const url = `${import.meta.env.VITE_API_URL}api/messages/`;
+    const url = `${import.meta.env.VITE_API_URL}/api/messages/`;
     const token = JSON.parse(localStorage.getItem("token"));
     const currentUser = JSON.parse(localStorage.getItem("user"));
 

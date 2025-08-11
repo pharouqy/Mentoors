@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const UpdatePage = () => {
-    const url = `${import.meta.env.VITE_API_URL}api/users/`;
+    const url = `${import.meta.env.VITE_API_URL}/api/users/`;
     const { id } = useParams();
     const navigate = useNavigate();
 

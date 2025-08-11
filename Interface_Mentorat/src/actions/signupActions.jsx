@@ -15,7 +15,7 @@ export const signup = (userData) => {
     try {
       // 1) Tenter un endpoint public s'il existe
       try {
-        const response = await axios.post(`${apiBase}api/users/register`, userData, {
+        const response = await axios.post(`${apiBase}/api/users/register`, userData, {
           headers: { "Content-Type": "application/json" },
         });
         dispatch({ type: SIGNUP_SUCCESS, payload: response.data });
@@ -28,7 +28,7 @@ export const signup = (userData) => {
           throw new Error("Inscription publique désactivée. Veuillez vous connecter en tant qu'administrateur.");
         }
 
-        const response = await axios.post(`${apiBase}api/users/`, userData, {
+        const response = await axios.post(`${apiBase}/api/users/`, userData, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${JSON.parse(token)}`,

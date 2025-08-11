@@ -3,8 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import MessageComponent from "../components/message";
 
-const url1 = `${import.meta.env.VITE_API_URL}api/sessions/`;
-const url2 = `${import.meta.env.VITE_API_URL}api/users/`;
+const url1 = `${import.meta.env.VITE_API_URL}/api/sessions/`;
+const url2 = `${import.meta.env.VITE_API_URL}/api/users/`;
 
 const Sessions = () => {
   const [sessions, setSessions] = useState([]);

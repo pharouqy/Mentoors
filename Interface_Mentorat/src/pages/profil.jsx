@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const url = `${import.meta.env.VITE_API_URL}api/users/`;
+const url = `${import.meta.env.VITE_API_URL}/api/users/`;
 
 const Profil = () => {
   const [loading, setLoading] = useState(true);
