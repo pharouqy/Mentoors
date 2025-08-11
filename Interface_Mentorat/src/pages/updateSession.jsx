@@ -33,7 +33,7 @@ const UpdateSession = () => {
         });
       } catch (error) {
         console.error("There was an error fetching the session data!", error);
-        alert("Erreur lors du chargement de la session. Veuillez réessayer.");
+        //alert("Erreur lors du chargement de la session. Veuillez réessayer.");
       } finally {
         setIsLoading(false);
       }
@@ -67,11 +67,11 @@ const UpdateSession = () => {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       });
-      alert("Session mise à jour avec succès !");
+      //alert("Session mise à jour avec succès !");
       navigate("/sessions");
     } catch (error) {
       console.error("There was an error updating the session!", error);
-      alert("Erreur lors de la mise à jour. Veuillez réessayer.");
+      //alert("Erreur lors de la mise à jour. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }

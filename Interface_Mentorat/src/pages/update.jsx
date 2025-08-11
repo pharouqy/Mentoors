@@ -39,7 +39,7 @@ const UpdatePage = () => {
                 });
             } catch (error) {
                 console.error("Error fetching data:", error);
-                alert("Erreur lors du chargement des données. Veuillez réessayer.");
+                //alert("Erreur lors du chargement des données. Veuillez réessayer.");
             } finally {
                 setIsLoading(false);
             }
@@ -81,11 +81,11 @@ const UpdatePage = () => {
                     Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
                 },
             });
-            alert("Profil mis à jour avec succès !");
+            //alert("Profil mis à jour avec succès !");
             navigate("/profil");
         } catch (error) {
             console.error("Error updating data:", error);
-            alert("Erreur lors de la mise à jour. Veuillez réessayer.");
+            //alert("Erreur lors de la mise à jour. Veuillez réessayer.");
         } finally {
             setIsSubmitting(false);
         }

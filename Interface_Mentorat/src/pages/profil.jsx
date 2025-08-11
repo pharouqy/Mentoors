@@ -49,10 +49,10 @@ const Profil = () => {
           },
         });
         setData(data.filter((user) => user.id !== id));
-        alert("Utilisateur supprimé avec succès !");
+        //alert("Utilisateur supprimé avec succès !");
       } catch (error) {
         setError(error.message);
-        alert("Erreur lors de la suppression de l'utilisateur.");
+        //alert("Erreur lors de la suppression de l'utilisateur.");
       }
     }
   };

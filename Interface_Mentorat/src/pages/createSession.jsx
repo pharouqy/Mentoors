@@ -73,11 +73,11 @@ const CreateSession = () => {
           },
         }
       );
-      alert("Session créée avec succès !");
+      //alert("Session créée avec succès !");
       navigate("/sessions");
     } catch (error) {
       console.error("There was an error creating the session!", error);
-      alert("Erreur lors de la création de la session. Veuillez réessayer.");
+      //alert("Erreur lors de la création de la session. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
