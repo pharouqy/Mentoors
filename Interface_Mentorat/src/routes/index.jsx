@@ -7,9 +7,9 @@ import Sessions from "../pages/sessions";
 import UpdateSession from "../pages/updateSession";
 import CreateSession from "../pages/createSession";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import PrivateRoute from "../components/PrivateRoute";
+import Header from "../components/header";
+import Footer from "../components/footer";
+import PrivateRoute from "../components/privateRoute";
 
 const RoutesComponent = () => {
   return (
