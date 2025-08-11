@@ -7,19 +7,36 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER.UNSIGNED
       },
       mentorId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
       },
       menteeId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
       },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM('pending', 'active', 'completed', 'cancelled'),
+        allowNull: false,
+        defaultValue: 'pending'
       },
       createdAt: {
         allowNull: false,
@@ -30,6 +47,10 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+
+    await queryInterface.addIndex('Sessions', ['mentorId']);
+    await queryInterface.addIndex('Sessions', ['menteeId']);
+    await queryInterface.addIndex('Sessions', ['date']);
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Sessions');

@@ -37,13 +37,13 @@ app.get("/",(req, res, next) => {
   res.status(200).json({message: "reussie !"});
 })
 
-// Synchronisation avec la base de données
-sequelize.sync({ force: false })  // force: false pour ne pas supprimer les données existantes
+// Vérifier la connexion à la base de données (les migrations gèrent le schéma)
+sequelize.authenticate()
   .then(() => {
-    console.log('Base de données synchronisée');
+    console.log('Connexion à la base de données réussie');
   })
   .catch((error) => {
-    console.error('Erreur lors de la synchronisation de la base de données :', error);
+    console.error('Erreur de connexion à la base de données :', error);
   });
 
 // Démarrage du serveur

@@ -37,7 +37,7 @@ const Header = () => {
               <span className="text-white font-bold text-lg">M</span>
             </div>
             <span className="text-cyan-400 font-bold text-xl tracking-wider">
-              MENTORAT
+              MENTOORS
             </span>
           </button>
 

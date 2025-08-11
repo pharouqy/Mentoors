@@ -142,7 +142,7 @@ const Profil = () => {
                         }`}>
                           {userItem.role === 'admin' ? 'Administrateur' :
                            userItem.role === 'mentor' ? 'Mentor' :
-                           userItem.role === 'mentee' ? 'Apprenti' : userItem.role || 'Rôle non défini'}
+                           userItem.role === 'mentee' ? 'Mentee' : userItem.role || 'Rôle non défini'}
                         </span>
                       </div>
                     </div>
@@ -194,7 +194,7 @@ const Profil = () => {
                   <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white mt-2 ${
                     userItem.role === 'mentor' ? 'bg-purple-500' : 'bg-cyan-500'
                   }`}>
-                    {userItem.role === 'mentor' ? 'Mentor' : 'Apprenti'}
+                    {userItem.role === 'mentor' ? 'Mentor' : 'Mentee'}
                   </span>
                 </div>
 

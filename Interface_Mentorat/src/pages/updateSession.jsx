@@ -139,7 +139,7 @@ const UpdateSession = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-cyan-300">Apprenti</label>
+              <label className="block text-sm font-medium text-cyan-300">Mentee</label>
               <input
                 type="text"
                 name="menteeId"

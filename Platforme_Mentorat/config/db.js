@@ -8,6 +8,7 @@ const sequelize = new Sequelize({
   username: process.env.DB_USER,  // Utilisateur de la base de données
   password: process.env.DB_PASSWORD,  // Mot de passe de l'utilisateur
   database: process.env.DB_NAME,  // Nom de la base de données
+  port: process.env.DB_PORT,  // Port de la base de données
   logging: false,  // Désactiver le logging des requêtes SQL (peut être activé pour le débogage)
 });
 

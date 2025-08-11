@@ -215,7 +215,7 @@ const Sessions = () => {
                             <span className="text-white font-bold text-sm">A</span>
                           </div>
                           <div>
-                            <p className="text-cyan-300 text-xs font-medium">APPRENTI</p>
+                            <p className="text-cyan-300 text-xs font-medium">MENTEE</p>
                             <p className="text-white font-semibold">{mentee.firstName} {mentee.lastName}</p>
                           </div>
                         </div>

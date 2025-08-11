@@ -1,27 +1,46 @@
 module.exports = (sequelize, DataTypes) => {
-  const Session = sequelize.define('Session', {
+  const Session = sequelize.define("Session", {
+    id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     mentorId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
     },
     menteeId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
     },
     date: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM('pending', 'active', 'completed', 'cancelled'),
-      defaultValue: 'pending'
-    }
+      type: DataTypes.ENUM("pending", "active", "completed", "cancelled"),
+      defaultValue: "pending",
+    },
   });
 
   Session.associate = (models) => {
-    Session.belongsTo(models.User, { as: 'Mentor', foreignKey: 'mentorId' });
-    Session.belongsTo(models.User, { as: 'Mentee', foreignKey: 'menteeId' });
-    Session.hasMany(models.Message, { foreignKey: 'sessionId' });
+    Session.belongsTo(models.User, {
+      as: "Mentor",
+      foreignKey: "mentorId",
+      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
+    });
+    Session.belongsTo(models.User, {
+      as: "Mentee",
+      foreignKey: "menteeId",
+      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
+    });
+    Session.hasMany(models.Message, {
+      foreignKey: "sessionId",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
   };
 
   return Session;
