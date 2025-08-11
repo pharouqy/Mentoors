@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../actions/authActions";
 
 const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
 
@@ -14,12 +16,14 @@ const Header = () => {
     localStorage.removeItem("user");
     dispatch(logout());
     navigate("/signin");
+    setIsMobileMenuOpen(false);
   };
 
   const handleLogoClick = () => {
     if (!isAuthenticated) {
       navigate("/");
     }
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -93,12 +97,70 @@ const Header = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button className="text-gray-300 hover:text-cyan-400 p-2 rounded-md">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            <button
+              type="button"
+              aria-label="Ouvrir le menu"
+              aria-expanded={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="text-gray-300 hover:text-cyan-400 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+           >
+              {isMobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
+        </div>
+
+        {/* Mobile menu */}
+        <div className="md:hidden">
+          {isMobileMenuOpen && (
+            <div className="px-4 pb-4 space-y-2">
+              {isAuthenticated ? (
+                <>
+                  <button
+                    onClick={() => {
+                      navigate("/profil");
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="w-full text-left text-gray-300 hover:text-cyan-400 hover:bg-slate-800/50 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200"
+                  >
+                    Profil
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigate("/sessions");
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="w-full text-left text-gray-300 hover:text-purple-400 hover:bg-slate-800/50 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200"
+                  >
+                    Sessions
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left text-gray-300 hover:text-pink-400 hover:bg-slate-800/50 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200"
+                  >
+                    Déconnexion
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => {
+                    navigate("/signin");
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full bg-gradient-to-r from-cyan-400 to-purple-500 hover:from-cyan-500 hover:to-purple-600 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-cyan-400/25"
+                >
+                  Connexion
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
         {/* User info banner */}

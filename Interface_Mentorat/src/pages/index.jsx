@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Index = () => {
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
             {/* Background decorative elements */}
@@ -60,26 +62,28 @@ const Index = () => {
                         </div>
                     </div>
 
-                    {/* Call to action buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-                        <Link to="/signup">
-                            <button className="bg-gradient-to-r from-cyan-400 to-purple-500 hover:from-cyan-500 hover:to-purple-600 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-cyan-400/25 flex items-center space-x-2">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                                </svg>
-                                <span>Commencer maintenant</span>
-                            </button>
-                        </Link>
-                        
-                        <Link to="/signin">
-                            <button className="bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:scale-105 flex items-center space-x-2">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                                </svg>
-                                <span>Se connecter</span>
-                            </button>
-                        </Link>
-                    </div>
+                    {/* Call to action buttons (only when not authenticated) */}
+                    {!isAuthenticated && (
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+                            <Link to="/signup">
+                                <button className="bg-gradient-to-r from-cyan-400 to-purple-500 hover:from-cyan-500 hover:to-purple-600 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-cyan-400/25 flex items-center space-x-2">
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                    </svg>
+                                    <span>Commencer maintenant</span>
+                                </button>
+                            </Link>
+                            
+                            <Link to="/signin">
+                                <button className="bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-200 hover:scale-105 flex items-center space-x-2">
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                    </svg>
+                                    <span>Se connecter</span>
+                                </button>
+                            </Link>
+                        </div>
+                    )}
 
                     {/* Stats section */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-3xl mx-auto pt-12">

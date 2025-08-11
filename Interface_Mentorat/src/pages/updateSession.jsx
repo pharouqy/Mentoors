@@ -148,7 +148,7 @@ const UpdateSession = () => {
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200"
                 disabled
               />
-              <p className="text-gray-400 text-xs">L'apprenti ne peut pas être modifié</p>
+              <p className="text-gray-400 text-xs">L&apos;apprenti ne peut pas être modifié</p>
             </div>
 
             <div className="space-y-2">
