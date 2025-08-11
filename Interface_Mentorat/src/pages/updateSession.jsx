@@ -20,7 +20,7 @@ const UpdateSession = () => {
     const fetchSession = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/sessions/${id}`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}api/sessions/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
@@ -61,7 +61,7 @@ const UpdateSession = () => {
     if (!validateForm()) return;
     setIsSubmitting(true);
     try {
-      await axios.put(`${import.meta.env.VITE_API_URL}/api/sessions/${id}`, formData, {
+      await axios.put(`${import.meta.env.VITE_API_URL}api/sessions/${id}`, formData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
