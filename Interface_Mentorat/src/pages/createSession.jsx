@@ -14,7 +14,7 @@ const CreateSession = () => {
         mentorId: "",
         menteeId: "",
         date: "",
-        status: "planned",
+        status: "",
     });
 
     const id = (JSON.parse(localStorage.getItem("user")).id);
