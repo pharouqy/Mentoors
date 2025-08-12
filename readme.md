@@ -64,14 +64,29 @@ cd Platforme_Mentorat
 npm install
 ```
 
-### 3️⃣ Configuration des fichiers `.env`
+### 3️⃣ Installer et configurer MAMP (MySQL)
+
+Pour utiliser MySQL en local, nous recommandons **MAMP**:
+
+1. Téléchargez et installez MAMP:
+   - Windows/macOS: `https://www.mamp.info/en/downloads/`
+2. Lancez MAMP et démarrez les serveurs.
+3. Par défaut, MySQL écoute sur `127.0.0.1:3306`.
+4. Identifiants par défaut (modifiable dans MAMP):
+   - Utilisateur: `root`
+   - Mot de passe: `root` (sur macOS) ou vide `""` (souvent sur Windows). Vérifiez les préférences MAMP.
+
+Vous pouvez aussi gérer la base via phpMyAdmin depuis MAMP, ou bien utiliser Sequelize CLI (recommandé ci‑dessous).
+
+### 4️⃣ Configuration des fichiers `.env`
 Créer un fichier `.env` dans `Platforme_Mentorat/` avec :
 ```
 DB_NAME=mentors
 DB_USER=root
-DB_PASSWORD=motdepasse
+DB_PASSWORD=root
 DB_HOST=localhost
 DB_DIALECT=mysql
+DB_PORT=3306
 PORT=4000
 JWT_SECRET=secret_key
 ```
@@ -79,7 +94,30 @@ Créer un fichier `.env` dans `Interface_Mentorat/` si nécessaire.
 ```
 VITE_API_URL=url_of_API
 ```
-### 4️⃣ Exécution de l'application
+
+### 5️⃣ Création de la base de données avec Sequelize CLI
+
+Assurez‑vous d'être dans le dossier `Platforme_Mentorat/` et que `sequelize-cli` est installé (il l'est déjà dans les dépendances du projet).
+
+1. Créer la base MySQL (si elle n'existe pas):
+```bash
+npx sequelize-cli db:create
+```
+
+2. Lancer les migrations:
+```bash
+npm run db:migrate
+```
+
+3. (Optionnel) Revenir en arrière ou réinitialiser:
+```bash
+npm run db:migrate:undo
+npm run db:migrate:reset
+```
+
+Si `db:create` échoue, vérifiez les identifiants MySQL MAMP (utilisateur/mot de passe) et le port dans `.env` et/ou `Platforme_Mentorat/config/config.json`.
+
+### 6️⃣ Exécution de l'application
 #### Démarrer le backend :
 ```bash
 cd Platforme_Mentorat
