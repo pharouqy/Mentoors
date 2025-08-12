@@ -1,0 +1,11 @@
+# robots.txt – Plateforme Mentoors
+# Autorise l'exploration de l'ensemble du site par tous les moteurs de recherche
+
+User-agent: *
+Allow: /
+
+# Facultatif: indiquez l'URL absolue de votre sitemap si disponible
+# Remplacez par votre domaine de production
+Sitemap: https://mentoors.vercel.app/sitemap.xml
+
+
