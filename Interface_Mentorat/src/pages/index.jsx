@@ -23,10 +23,10 @@ const Index = () => {
                                 Plateforme de Mentorat
                             </span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                        <h2 className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
                             Connectez-vous avec des mentors expérimentés et développez vos compétences 
                             dans un environnement collaboratif et innovant
-                        </p>
+                        </h2>
                     </div>
 
                     {/* Feature highlights */}
