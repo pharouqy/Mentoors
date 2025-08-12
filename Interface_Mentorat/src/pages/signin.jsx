@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../actions/authActions";
 import { useNavigate } from "react-router-dom";
@@ -7,12 +7,34 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const { isAuthenticated, error: authError } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+
+  const emailRegex = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/, []);
+
+  const validateForm = () => {
+    const nextErrors = {};
+    if (!email) {
+      nextErrors.email = "L'email est requis";
+    } else if (!emailRegex.test(email)) {
+      nextErrors.email = "Format d'email invalide";
+    }
+
+    if (!password) {
+      nextErrors.password = "Le mot de passe est requis";
+    } else if (password.length < 6) {
+      nextErrors.password = "Au moins 6 caractères";
+    }
+
+    setFieldErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     setIsLoading(true);
     try {
       await dispatch(login({ email, password }));
@@ -49,6 +71,13 @@ const SignIn = () => {
             <p className="text-gray-300 text-sm">Accédez à votre espace mentorat</p>
           </div>
 
+          {/* Erreur serveur globale */}
+          {authError && (
+            <div className="rounded-lg border border-red-400/40 bg-red-500/10 text-red-300 px-4 py-2 text-sm">
+              {authError}
+            </div>
+          )}
+
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
@@ -64,12 +93,24 @@ const SignIn = () => {
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (fieldErrors.email) {
+                      setFieldErrors((prev) => ({ ...prev, email: "" }));
+                    }
+                  }}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200"
+                  className={`w-full pl-10 pr-4 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none transition-all duration-200 ${
+                    fieldErrors.email
+                      ? "border-red-400 focus:ring-2 focus:ring-red-400 focus:border-transparent"
+                      : "border-white/20 focus:ring-2 focus:ring-cyan-400 focus:border-transparent"
+                  }`}
                   placeholder="votre@email.com"
                 />
               </div>
+              {fieldErrors.email && (
+                <p className="text-red-400 text-xs mt-1">{fieldErrors.email}</p>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -85,12 +126,24 @@ const SignIn = () => {
                 <input
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (fieldErrors.password) {
+                      setFieldErrors((prev) => ({ ...prev, password: "" }));
+                    }
+                  }}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200"
+                  className={`w-full pl-10 pr-4 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none transition-all duration-200 ${
+                    fieldErrors.password
+                      ? "border-red-400 focus:ring-2 focus:ring-red-400 focus:border-transparent"
+                      : "border-white/20 focus:ring-2 focus:ring-cyan-400 focus:border-transparent"
+                  }`}
                   placeholder="••••••••"
                 />
               </div>
+              {fieldErrors.password && (
+                <p className="text-red-400 text-xs mt-1">{fieldErrors.password}</p>
+              )}
             </div>
 
             <button

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../actions/signupActions";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,9 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const signupError = useSelector((state) => state.signup.error);
+
+  const emailRegex = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -37,6 +40,7 @@ const SignUp = () => {
     if (!formData.firstname) newErrors.firstname = "Le prénom est requis";
     if (!formData.lastname) newErrors.lastname = "Le nom de famille est requis";
     if (!formData.email) newErrors.email = "L'email est requis";
+    else if (!emailRegex.test(formData.email)) newErrors.email = "Format d'email invalide";
     if (!formData.password) newErrors.password = "Le mot de passe est requis";
     if (formData.password !== formData.confirmPassword)
       newErrors.confirmPassword = "Les mots de passe ne correspondent pas";
@@ -63,10 +67,11 @@ const SignUp = () => {
         role: formData.role,
       };
       await dispatch(signup(signupData));
-      //alert("Inscription réussie !");
+      // L'action signup déclenche une connexion automatique (LOGIN_SUCCESS)
+      // Si tout se passe bien, on envoie l'utilisateur directement sur son profil
       navigate("/profil");
     } catch (error) {
-      console.error("Erreur lors de l'inscription:", error);
+      // Rien: l'erreur serveur est lue depuis Redux et affichée plus bas
     } finally {
       setIsLoading(false);
     }
@@ -106,6 +111,13 @@ const SignUp = () => {
               Rejoignez la communauté mentorat
             </p>
           </div>
+
+          {/* Erreur serveur */}
+          {signupError && (
+            <div className="rounded-lg border border-red-400/40 bg-red-500/10 text-red-300 px-4 py-2 text-sm">
+              {signupError}
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -181,7 +193,12 @@ const SignUp = () => {
                   type="password"
                   name="password"
                   value={formData.password}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    if (errors.confirmPassword && e.target.value === formData.confirmPassword) {
+                      setErrors((prev) => ({ ...prev, confirmPassword: "" }));
+                    }
+                  }}
                   required
                   className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 ${
                     errors.password ? "border-red-400" : "border-white/20"
@@ -200,7 +217,12 @@ const SignUp = () => {
                   type="password"
                   name="confirmPassword"
                   value={formData.confirmPassword}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    if (errors.confirmPassword && e.target.value === formData.password) {
+                      setErrors((prev) => ({ ...prev, confirmPassword: "" }));
+                    }
+                  }}
                   required
                   className={`w-full px-4 py-3 bg-white/10 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 ${
                     errors.confirmPassword

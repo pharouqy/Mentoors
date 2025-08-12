@@ -31,7 +31,9 @@ export const login = ({ email, password }) => {
         dispatch({ type: LOGIN_SUCCESS, payload: user });
       })
       .catch((error) => {
-        dispatch({ type: LOGIN_FAILURE, payload: error.message });
+        const serverMessage = error.response?.data?.error || error.response?.data?.message;
+        const message = serverMessage || error.message || "Echec de connexion";
+        dispatch({ type: LOGIN_FAILURE, payload: message });
       });
   };
 };
